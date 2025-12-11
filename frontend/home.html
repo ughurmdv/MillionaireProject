@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <meta charset="UTF-8">
+    <title>Home - Millionaire</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="start-bg">
+<header class="top-bar">
+    <div class="top-bar-left">
+        <div class="logo-mini">M</div>
+        <span class="top-app-name">Millionaire</span>
+    </div>
+    <div class="top-bar-right">
+        <span class="top-user-label">Player:</span>
+        <span id="home-player-name" class="top-user-name"></span>
+        <button class="icon-btn" onclick="logout()" type="button" id="logout-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                 stroke="#ffdf6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"/>
+                <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+        </button>
+        
+        
+    </div>
+</header>
+
+<main class="home-main">
+    <div class="home-card">
+        <h2>Ready to play?</h2>
+        <p>Answer 12 questions, use your lifelines wisely and reach 1,000,000 $.</p>
+        <button id="start-btn" class="btn-hex big"><span>Start Game</span></button>
+        <button id="home-leaderboard-btn" class="btn-hex"><span>Leaderboard</span></button>
+    </div>
+</main>
+
+<script src="main.js"></script>
+</body>
+</html>
