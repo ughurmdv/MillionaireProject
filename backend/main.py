@@ -11,6 +11,7 @@ from questions import get_game_questions, get_random_question_by_difficulty
 
 Base.metadata.create_all(bind=engine)
 
+
 app = FastAPI(title="Millionaire Game API")
 
 
@@ -36,7 +37,9 @@ def root():
     return {"message": "Millionaire Game API is running"}
 
 
-
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
 
 @app.post("/signup")
@@ -61,16 +64,12 @@ def login(user: UserCreate, db: Session = Depends(get_db)):
     if not db_user or not verify_password(user.password, db_user.password):
         raise HTTPException(status_code=400, detail="Invalid username or password")
 
- 
     return {"message": "Login successful", "username": db_user.username}
-
-
 
 
 @app.get("/questions")
 def questions():
     return get_game_questions()
-
 
 @app.get("/question_new/{difficulty}")
 def question_new(difficulty: str):
@@ -81,15 +80,11 @@ def question_new(difficulty: str):
         raise HTTPException(status_code=400, detail="Invalid difficulty")
 
 
-
-
-
 @app.post("/score")
 def submit_score(score: ScoreIn, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.username == score.username).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-
 
     user.total_money += score.earned
     db.commit()
