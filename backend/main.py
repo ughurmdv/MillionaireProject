@@ -18,8 +18,9 @@ app = FastAPI(title="Millionaire Game API")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://millionaireproject-1.onrender.com",
-        "http://localhost:8000" 
+        "https://millionaireproject-1.onrender.com",  
+        "https://millionaireproject.onrender.com",   
+        "http://localhost:8000"
     ],
     allow_credentials=True,
     allow_methods=["*"],
