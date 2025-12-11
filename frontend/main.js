@@ -1,6 +1,6 @@
 console.log("MAIN.JS LOADED");
 
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "https://millionaireproject.onrender.com";
 
 function playSound(id) {
     const el = document.getElementById(id);
