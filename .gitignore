@@ -1,2 +1,5 @@
 .vscode
-backend/__pycache__/
+backend/__pycache__
+*.db
+*.sqlite
+*.sqlite3
