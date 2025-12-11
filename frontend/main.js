@@ -1,14 +1,6 @@
-// =============================================================
-//  Millionaire Game - Clean Frontend Logic
-// =============================================================
-
 console.log("MAIN.JS LOADED");
 
 const API_BASE = "http://127.0.0.1:8000";
-
-// -------------------------------------------------------------
-// Helper utils
-// -------------------------------------------------------------
 
 function playSound(id) {
     const el = document.getElementById(id);
@@ -84,10 +76,6 @@ function logout() {
 }
 window.logout = logout;
 
-// -------------------------------------------------------------
-// Auth
-// -------------------------------------------------------------
-
 function signup() {
     const u = document.getElementById("signup-username");
     const p = document.getElementById("signup-password");
@@ -155,10 +143,6 @@ function login() {
 window.signup = signup;
 window.login = login;
 
-// -------------------------------------------------------------
-// Game state
-// -------------------------------------------------------------
-
 const MONEY_LADDER = [
     100, 200, 300, 500,
     1000, 2000, 4000, 8000,
@@ -167,7 +151,7 @@ const MONEY_LADDER = [
 const QUESTION_TIME = 30;
 
 const gameState = {
-    status: "idle",   // idle | playing | finished
+    status: "idle",   
     questions: [],
     index: 0,
     earned: 0,
@@ -182,12 +166,10 @@ const gameState = {
     finishedOnce: false
 };
 
-// -------------------------------------------------------------
-// Page init
-// -------------------------------------------------------------
+
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Home page
+    
     const homeName = document.getElementById("home-player-name");
     if (homeName) {
         const p = localStorage.getItem("player");
@@ -204,20 +186,17 @@ document.addEventListener("DOMContentLoaded", () => {
         if (lbBtn) lbBtn.onclick = () => window.location = "leaderboard.html";
     }
 
-    // Game page
+
     if (document.getElementById("question-text")) {
         initGamePage();
     }
 
-    // Leaderboard page
+
     if (document.getElementById("leaderboard-list")) {
         loadLeaderboard();
     }
 });
 
-// -------------------------------------------------------------
-// Game init
-// -------------------------------------------------------------
 
 function initGamePage() {
     const player = localStorage.getItem("player");
@@ -289,9 +268,6 @@ function fetchQuestionsAndStart() {
         });
 }
 
-// -------------------------------------------------------------
-// Show question
-// -------------------------------------------------------------
 
 function showQuestion() {
     if (gameState.status !== "playing") return;
@@ -321,9 +297,6 @@ function showQuestion() {
     startTimer();
 }
 
-// -------------------------------------------------------------
-// Answer handling
-// -------------------------------------------------------------
 
 function onAnswerClick(el, selected) {
     if (gameState.status !== "playing") return;
@@ -334,20 +307,17 @@ function onAnswerClick(el, selected) {
     const q = gameState.questions[gameState.index];
     const all = document.querySelectorAll(".answer");
 
-    // Disable all answers instantly
     all.forEach(a => (a.onclick = null));
 
-    // Mark selected answer for suspense
+
     el.classList.add("selected");
 
-    // Wait 2 seconds before revealing truth
+  
     setTimeout(() => {
 
-        el.classList.remove("selected");  // remove suspense highlight
+        el.classList.remove("selected"); 
 
-        // ----------------------------
-        // CASE 1 – CORRECT ANSWER
-        // ----------------------------
+       
         if (selected === q.correct) {
             el.classList.add("correct");
             playSound("sound-correct");
@@ -356,7 +326,7 @@ function onAnswerClick(el, selected) {
             const wEl = document.getElementById("current-earnings");
             if (wEl) wEl.textContent = String(gameState.earned);
 
-            // Last question
+          
             if (gameState.index === gameState.questions.length - 1) {
                 gameState.status = "finished";
                 setTimeout(() => {
@@ -365,7 +335,7 @@ function onAnswerClick(el, selected) {
                 return;
             }
 
-            // Next question
+          
             setTimeout(() => {
                 if (gameState.status !== "playing") return;
                 gameState.index++;
@@ -373,14 +343,12 @@ function onAnswerClick(el, selected) {
             }, 1500);
         }
 
-        // ----------------------------
-        // CASE 2 – WRONG ANSWER
-        // ----------------------------
+      
         else {
             el.classList.add("wrong");
             playSound("sound-wrong");
 
-            // reveal correct one
+        
             all.forEach(a => {
                 if (a.textContent === q.correct) a.classList.add("correct");
             });
@@ -396,7 +364,7 @@ function onAnswerClick(el, selected) {
             setTimeout(() => finishGame(msg), 2000);
         }
 
-    }, 2000); // <-- 2-second suspense delay before revealing correct/wrong
+    }, 2000); 
 }
 
 function stopSound(id) {
@@ -406,9 +374,6 @@ function stopSound(id) {
     el.currentTime = 0;
 }
 
-// -------------------------------------------------------------
-// Timer
-// -------------------------------------------------------------
 
 function startTimer() {
     stopTimer();
@@ -447,15 +412,12 @@ function updateTimerUI() {
     if (t) t.textContent = String(gameState.timeLeft);
 }
 
-// -------------------------------------------------------------
-// Lifelines (jokers) – with fade
-// -------------------------------------------------------------
 
 function markLifelineUsed(id) {
     const el = document.getElementById(id);
     if (el) {
         el.disabled = true;
-        el.classList.add("used"); // CSS will fade it
+        el.classList.add("used"); 
     }
 }
 
@@ -515,9 +477,6 @@ function lifelineChange() {
         });
 }
 
-// -------------------------------------------------------------
-// Ladder
-// -------------------------------------------------------------
 
 function drawLadder() {
     const ladder = document.getElementById("ladder");
@@ -540,9 +499,6 @@ function highlightLadder() {
     if (rows[idxFromTop]) rows[idxFromTop].classList.add("current");
 }
 
-// -------------------------------------------------------------
-// Finish game
-// -------------------------------------------------------------
 
 function finishGame(reasonHtml) {
     if (gameState.finishedOnce) return;
@@ -574,9 +530,6 @@ function finishGame(reasonHtml) {
         .finally(showEnd);
 }
 
-// -------------------------------------------------------------
-// Leaderboard
-// -------------------------------------------------------------
 
 function loadLeaderboard() {
     fetch(API_BASE + "/leaderboard")
