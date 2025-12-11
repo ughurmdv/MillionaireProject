@@ -4,10 +4,6 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 def _truncate(password: str) -> str:
-    """
-    bcrypt has a hard 72-byte limit.
-    CI test inputs may exceed this, so we enforce safe truncation here.
-    """
     if password is None:
         return ""
     return password[:72]
