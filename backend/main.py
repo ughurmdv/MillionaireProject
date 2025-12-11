@@ -2,21 +2,21 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
-from .database import SessionLocal, engine, Base
-from .models import User
-from .schemas import UserCreate, UserOut, ScoreIn
-from .auth import hash_password, verify_password
-from .questions import get_game_questions, get_random_question_by_difficulty
+from database import SessionLocal, engine, Base
+from models import User
+from schemas import UserCreate, UserOut, ScoreIn
+from auth import hash_password, verify_password
+from questions import get_game_questions, get_random_question_by_difficulty
 
 
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Millionaire Game API")
 
-# CORS – allow frontend
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # for a project this is fine
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -36,7 +36,7 @@ def root():
     return {"message": "Millionaire Game API is running"}
 
 
-# ----------------- AUTH ------------------------
+
 
 
 @app.post("/signup")
@@ -61,11 +61,10 @@ def login(user: UserCreate, db: Session = Depends(get_db)):
     if not db_user or not verify_password(user.password, db_user.password):
         raise HTTPException(status_code=400, detail="Invalid username or password")
 
-    # simple auth: frontend keeps username in localStorage
+ 
     return {"message": "Login successful", "username": db_user.username}
 
 
-# ----------------- QUESTIONS -------------------
 
 
 @app.get("/questions")
@@ -82,7 +81,7 @@ def question_new(difficulty: str):
         raise HTTPException(status_code=400, detail="Invalid difficulty")
 
 
-# ----------------- SCORE & LEADERBOARD --------
+
 
 
 @app.post("/score")
