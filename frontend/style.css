@@ -1,9 +1,6 @@
 * {
     box-sizing: border-box;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-}f
+}
 
 body {
     margin: 0;
@@ -476,6 +473,25 @@ body {
         height: 48px;
     }
 }
+
+/* Center start page on screen */
+.start-container {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Center auth box */
+.auth-container {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Center home card */
+.home-card {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 /* Tablets + Medium Phones */
 @media (max-width: 768px) {
