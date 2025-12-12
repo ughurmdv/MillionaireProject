@@ -2,13 +2,18 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
-from database import SessionLocal, engine, Base
-from models import User
-from schemas import UserCreate, UserOut, ScoreIn
-from auth import hash_password, verify_password
-from questions import get_game_questions, get_random_question_by_difficulty
-from fastapi.staticfiles import StaticFiles
+# from database import SessionLocal, engine, Base
+# from models import User
+# from schemas import UserCreate, UserOut, ScoreIn
+# from auth import hash_password, verify_password
+# from questions import get_game_questions, get_random_question_by_difficulty
+# # from fastapi.staticfiles import StaticFiles
 
+from backend.database import SessionLocal, engine, Base
+from backend.models import User
+from backend.schemas import UserCreate, UserOut, ScoreIn
+from backend.auth import hash_password, verify_password
+from backend.questions import get_game_questions, get_random_question_by_difficulty
 
 
 Base.metadata.create_all(bind=engine)
@@ -16,7 +21,7 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Millionaire Game API")
 
-app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
+# app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
 
 
 app.add_middleware(
