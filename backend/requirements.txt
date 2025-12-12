@@ -1,9 +1,7 @@
 fastapi
 uvicorn
 sqlalchemy
-passlib==1.7.4
+passlib[bcrypt]
 bcrypt==3.2.2
 pytest
-pydantic
-python-multipart
 httpx
