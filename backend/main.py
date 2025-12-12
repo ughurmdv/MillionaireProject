@@ -7,12 +7,16 @@ from models import User
 from schemas import UserCreate, UserOut, ScoreIn
 from auth import hash_password, verify_password
 from questions import get_game_questions, get_random_question_by_difficulty
+from fastapi.staticfiles import StaticFiles
+
 
 
 Base.metadata.create_all(bind=engine)
 
 
 app = FastAPI(title="Millionaire Game API")
+
+app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
 
 
 app.add_middleware(
