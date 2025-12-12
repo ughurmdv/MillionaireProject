@@ -7,7 +7,7 @@ sys.path.insert(0, os.path.abspath("."))
 
 from backend.main import app
 from backend.database import Base, engine
-from backend import models  # <-- THIS LINE IS CRITICAL
+from backend import models  
 
 Base.metadata.create_all(bind=engine)
 

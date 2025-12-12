@@ -127,6 +127,7 @@ function login() {
 
     const username = u.value.trim();
     const password = p.value.trim();
+
     if (!username || !password) {
         alert("Please enter username and password");
         return;
@@ -137,14 +138,21 @@ function login() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
     })
-    .then(async response => {
-        const text = await response.text();   
-        if (!response.ok) {
-            throw new Error(text || "Login failed");
+    .then(async (r) => {
+        let data = null;
+        try {
+            data = await r.json();
+        } catch (e) {
+            // backend returned empty body
         }
-        return text ? JSON.parse(text) : {};
+
+        if (!r.ok) {
+            throw new Error(data?.detail || "Login failed");
+        }
+
+        return data;
     })
-    .then(data => {
+    .then((data) => {
         localStorage.setItem("player", data.username);
         window.location = "home.html";
     })
@@ -153,6 +161,7 @@ function login() {
         alert(err.message);
     });
 }
+
 
 window.signup = signup;
 window.login = login;
