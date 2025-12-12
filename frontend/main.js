@@ -134,19 +134,21 @@ function login() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
     })
-        .then(r => r.json().then(d => ({ ok: r.ok, d })))
-        .then(({ ok, d }) => {
-            if (!ok || !d.username) {
-                alert(d.detail || "Login failed");
-            } else {
-                localStorage.setItem("player", d.username);
-                window.location = "home.html";
-            }
-        })
-        .catch(err => {
-            console.error("Login error:", err);
-            alert("Login failed (see console).");
-        });
+    .then(async response => {
+        const text = await response.text();   
+        if (!response.ok) {
+            throw new Error(text || "Login failed");
+        }
+        return text ? JSON.parse(text) : {};
+    })
+    .then(data => {
+        localStorage.setItem("player", data.username);
+        window.location = "home.html";
+    })
+    .catch(err => {
+        console.error("Login error:", err);
+        alert(err.message);
+    });
 }
 
 window.signup = signup;
