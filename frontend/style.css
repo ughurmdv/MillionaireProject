@@ -8,7 +8,7 @@ body {
 }
 
 /* Background */
-
+/* 
 .start-bg {
     min-height: 100vh;
     display: flex;
@@ -17,7 +17,18 @@ body {
     align-items: center;
     background: radial-gradient(circle at top, #581a01 0%, #02053f 55%, #910909 100%);
     color: #f70e0e;
-}
+} */
+
+.start-bg {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    background: hotpink !important;
+    color: black !important;
+  }
 
 /* Reusable elements */
 
