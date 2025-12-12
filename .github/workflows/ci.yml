@@ -28,7 +28,7 @@ jobs:
         run: |
           echo "PYTHONPATH=$PYTHONPATH:$(pwd)/backend" >> $GITHUB_ENV
 
-            - name: Prepare database
+      - name: Prepare database
         run: |
           python - <<EOF
           from backend.database import Base, engine
