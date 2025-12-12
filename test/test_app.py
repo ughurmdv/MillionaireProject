@@ -3,10 +3,13 @@ import os
 import uuid
 from fastapi.testclient import TestClient
 
-
 sys.path.insert(0, os.path.abspath("."))
 
 from backend.main import app
+from backend.database import Base, engine
+from backend import models  # <-- THIS LINE IS CRITICAL
+
+Base.metadata.create_all(bind=engine)
 
 client = TestClient(app)
 
