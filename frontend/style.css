@@ -469,3 +469,143 @@ body {
     box-shadow: 0 0 20px rgba(100, 120, 255, 0.6);
     transform: scale(1.02);
 }
+/* ============================================
+   RESPONSIVE LAYOUT — CLEAN & MODERN
+============================================ */
+
+/* Large Tablets & Small Laptops */
+@media (max-width: 992px) {
+
+    .top-bar {
+        padding: 10px 18px;
+    }
+
+    .game-shell {
+        max-width: 900px;
+        padding: 14px;
+        gap: 14px;
+    }
+
+    .question-box {
+        font-size: 17px;
+        padding: 14px 16px;
+        min-height: 72px;
+    }
+
+    .answers-grid {
+        gap: 10px;
+    }
+
+    .timer-circle {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+/* Tablets + Medium Phones */
+@media (max-width: 768px) {
+
+    .start-container,
+    .home-card {
+        max-width: 100%;
+        padding: 22px;
+    }
+
+    .auth-container {
+        width: calc(100% - 40px);
+        padding: 22px 20px;
+        max-width: 420px;
+    }
+
+    .game-shell {
+        flex-direction: column;
+        align-items: center;
+        padding: 16px;
+        gap: 18px;
+    }
+
+    .question-box {
+        font-size: 16px;
+        padding: 14px 16px;
+        min-height: 68px;
+    }
+
+    .answers-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .lifeline {
+        min-width: 100%;
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .ladder-box {
+        width: 100%;
+    }
+}
+
+/* Small Phones (iPhone SE) */
+@media (max-width: 480px) {
+
+    .top-bar {
+        padding: 8px 12px;
+        gap: 6px;
+    }
+
+    .logo-mini {
+        width: 28px;
+        height: 28px;
+    }
+
+    .icon-btn {
+        width: 28px;
+        height: 28px;
+    }
+
+    .game-shell {
+        padding: 12px;
+    }
+
+    .question-box {
+        font-size: 15px;
+        padding: 12px;
+        min-height: 64px;
+    }
+
+    .answer {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    .timer-circle {
+        width: 42px;
+        height: 42px;
+        font-size: 14px;
+    }
+
+    .lifeline {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
+
+/* Extra Small Phones */
+@media (max-width: 360px) {
+
+    .question-box {
+        font-size: 14px;
+        min-height: 58px;
+    }
+
+    .answer {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    .lifeline {
+        padding: 6px;
+        font-size: 12px;
+    }
+}
