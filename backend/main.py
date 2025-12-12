@@ -16,8 +16,6 @@ from backend.auth import hash_password, verify_password
 from backend.questions import get_game_questions, get_random_question_by_difficulty
 
 
-Base.metadata.create_all(bind=engine)
-
 
 app = FastAPI(title="Millionaire Game API")
 
@@ -34,6 +32,10 @@ app = FastAPI(title="Millionaire Game API")
 #     allow_headers=["*"],
 # )
 
+@app.on_event("startup")
+def startup():
+    Base.metadata.create_all(bind=engine)
+    
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -53,6 +55,7 @@ def get_db():
         yield db
     finally:
         db.close()
+
 
 
 @app.get("/")

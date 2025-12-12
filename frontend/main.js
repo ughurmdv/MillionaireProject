@@ -96,14 +96,17 @@ function signup() {
         body: JSON.stringify({ username, password })
     })
     .then(async r => {
-        let data = null;
+        const text = await r.text();
+        if (!text) throw new Error("Empty response from server");
+    
+        let data;
         try {
-            data = await r.json();
-        } catch (e) {}
-
-        if (!r.ok) {
-            throw new Error(data?.detail || "Signup failed");
+            data = JSON.parse(text);
+        } catch {
+            throw new Error("Invalid JSON from server");
         }
+    
+        if (!r.ok) throw new Error(data.detail || "Request failed");
         return data;
     })
     .then(() => {
