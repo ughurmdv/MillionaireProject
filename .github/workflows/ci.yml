@@ -28,6 +28,13 @@ jobs:
         run: |
           echo "PYTHONPATH=$PYTHONPATH:$(pwd)/backend" >> $GITHUB_ENV
 
+            - name: Prepare database
+        run: |
+          python - <<EOF
+          from backend.database import Base, engine
+          Base.metadata.create_all(bind=engine)
+          EOF
+
       - name: Run tests
         run: |
           pytest test -v
