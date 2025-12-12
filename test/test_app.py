@@ -1,5 +1,6 @@
 import sys
 import os
+import uuid
 from fastapi.testclient import TestClient
 
 
@@ -8,6 +9,9 @@ sys.path.insert(0, os.path.abspath("."))
 from backend.main import app
 
 client = TestClient(app)
+
+TEST_USERNAME = f"user_{uuid.uuid4().hex[:8]}"
+TEST_PASSWORD = "testpass"
 
 
 def test_root():
@@ -33,33 +37,31 @@ def test_get_question_by_difficulty():
 
 
 def test_signup_user():
-    """Test user signup."""
     response = client.post("/signup", json={
-        "username": "testuser",
-        "password": "testpass"
+        "username": TEST_USERNAME,
+        "password": TEST_PASSWORD
     })
-
     assert response.status_code in [200, 400]
+
+
 
 
 def test_login_user():
-    """Test user login."""
     response = client.post("/login", json={
-        "username": "testuser",
-        "password": "testpass"
+        "username": TEST_USERNAME,
+        "password": TEST_PASSWORD
     })
-  
     assert response.status_code in [200, 400]
 
 
+
 def test_submit_score():
-    """Test score submission for an existing user."""
     response = client.post("/score", json={
-        "username": "testuser",
+        "username": TEST_USERNAME,
         "earned": 500
     })
-  
     assert response.status_code in [200, 404]
+
 
 
 def test_leaderboard():
