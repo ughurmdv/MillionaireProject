@@ -8,27 +8,12 @@ body {
 }
 
 /* Background */
-/* 
-.start-bg {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: radial-gradient(circle at top, #581a01 0%, #02053f 55%, #910909 100%);
-    color: #f70e0e;
-} */
 
 .start-bg {
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  
-    background: hotpink !important;
-    color: black !important;
-  }
+    background: radial-gradient(circle at top, #2836ff 0%, #07081a 55%, #000000 100%);
+    color: #f5f5ff;
+}
 
 /* Reusable elements */
 
@@ -38,9 +23,6 @@ body {
     align-items: center;
     padding: 10px 26px;
     color: #fefefe;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .top-bar-left,
@@ -54,8 +36,8 @@ body {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: radial-gradient(circle, #850f0f, #1a1919);
-    color: #9e1800;
+    background: radial-gradient(circle, #ffdf6b, #b46b00);
+    color: #050517;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -142,7 +124,7 @@ body {
 
 .start-container {
     max-width: 700px;
-    margin: 0 auto;
+    margin: 80px auto;
     text-align: center;
 }
 
@@ -182,15 +164,12 @@ body {
 
 .auth-container {
     max-width: 380px;
-    margin: 0 auto;
+    margin: 90px auto;
     padding: 24px 26px 28px;
     background: rgba(5, 5, 32, 0.92);
     border-radius: 16px;
     border: 1px solid rgba(255,255,255,0.2);
     box-shadow: 0 16px 40px rgba(0,0,0,0.8);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .auth-container h2 {
@@ -200,7 +179,6 @@ body {
 
 .auth-field {
     margin-bottom: 14px;
-    width: 100%;
 }
 
 .auth-field label {
@@ -234,10 +212,7 @@ body {
 .home-main {
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 60px);
-    padding: 16px;
-    width: 100%;
+    padding: 40px 16px;
 }
 
 .home-card {
@@ -252,21 +227,16 @@ body {
 /* Game layout */
 
 .game-shell {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* top of game content */
+    display: grid;
+    grid-template-columns: 3fr 1.1fr;
     gap: 18px;
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
+    padding: 12px 22px 30px;
 }
 
 .game-left {
     display: flex;
     flex-direction: column;
     gap: 14px;
-    flex: 1;
 }
 
 .info-row {
@@ -281,7 +251,6 @@ body {
     border-radius: 12px;
     background: rgba(5,5,35,0.9);
     border: 1px solid rgba(255,255,255,0.15);
-    text-align: center;
 }
 
 .info-label {
@@ -396,12 +365,12 @@ body {
     background: rgba(5,5,35,0.9);
     border-radius: 18px;
     border: 1px solid rgba(255,255,255,0.25);
-    text-align: center;
 }
 
 .ladder-box h3 {
     margin-top: 0;
     margin-bottom: 8px;
+    text-align: center;
     font-size: 15px;
 }
 
@@ -424,12 +393,7 @@ body {
 /* Leaderboard */
 
 .leaderboard-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 60px);
-    padding: 20px 22px;
+    padding: 20px 22px 40px;
 }
 
 .leaderboard-list {
@@ -445,23 +409,31 @@ body {
     font-size: 14px;
 }
 
-/* Logout/Home buttons hover effects */
+#logout-btn svg {
+    stroke: #ffdf6b;
+    transition: stroke 0.2s ease, transform 0.2s ease;
+}
 
-#logout-btn svg,
+#logout-btn:hover svg {
+    stroke: #ffffff;
+    transform: scale(1.07);
+}
+#logout-btn:hover {
+    box-shadow: 0 0 10px rgba(255,215,0,0.4);
+}
+
 #home-btn svg {
     stroke: #ffdf6b;
     transition: stroke 0.2s ease, transform 0.2s ease;
 }
 
-#logout-btn:hover svg,
 #home-btn:hover svg {
     stroke: #ffffff;
-    transform: scale(1.07);
+    transform: scale(1.1);
 }
 
-#logout-btn:hover,
 #home-btn:hover {
-    box-shadow: 0 0 10px rgba(255,215,0,0.4);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.45);
 }
 
 .answer.selected {
