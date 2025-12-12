@@ -1,6 +1,6 @@
 console.log("MAIN.JS LOADED");
 
-const API_BASE = "https://millionaireproject-1.onrender.com";
+const API_BASE = "https://millionaireproject.onrender.com";
 
 function playSound(id) {
     const el = document.getElementById(id);
@@ -83,6 +83,7 @@ function signup() {
 
     const username = u.value.trim();
     const password = p.value.trim();
+
     if (!username || !password) {
         alert("Please enter username and password");
         return;
@@ -93,20 +94,27 @@ function signup() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
     })
-        .then(r => r.json().then(d => ({ ok: r.ok, d })))
-        .then(({ ok, d }) => {
-            if (!ok) {
-                alert(d.detail || "Signup failed");
-            } else {
-                alert("Signup successful. You can log in now.");
-                window.location = "login.html";
-            }
-        })
-        .catch(err => {
-            console.error("Signup error:", err);
-            alert("Signup failed (see console).");
-        });
+    .then(async r => {
+        let data = null;
+        try {
+            data = await r.json();
+        } catch (e) {}
+
+        if (!r.ok) {
+            throw new Error(data?.detail || "Signup failed");
+        }
+        return data;
+    })
+    .then(() => {
+        alert("Signup successful. You can log in now.");
+        window.location = "login.html";
+    })
+    .catch(err => {
+        console.error("Signup error:", err);
+        alert(err.message);
+    });
 }
+
 
 function login() {
     const u = document.getElementById("login-username");
