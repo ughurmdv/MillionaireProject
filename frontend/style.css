@@ -16,7 +16,7 @@ body {
     justify-content: center;
     align-items: center;
     background: radial-gradient(circle at top, #581a01 0%, #02053f 55%, #910909 100%);
-    color: #f5f5ff;
+    color: #f70e0e;
 }
 
 /* Reusable elements */
@@ -43,8 +43,8 @@ body {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: radial-gradient(circle, #ffdf6b, #b46b00);
-    color: #050517;
+    background: radial-gradient(circle, #850f0f, #1a1919);
+    color: #9e1800;
     display: flex;
     align-items: center;
     justify-content: center;
